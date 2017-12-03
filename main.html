@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <title>Pretty logger</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ace.c9.io/build/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="src/moment.min.js"></script>
+    <script src="src/highlight.js"></script>
+    <link rel="stylesheet" href="src/style.css">
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Pretty logger</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#about" data-toggle="modal" data-target="#aboutModal">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="btn-group" data-toggle="buttons" onchange="filterLevel();">
+          <label class="btn btn-primary active">
+            <input type="checkbox" checked value="[TRACE]" name="log-level"> Trace
+          </label>
+          <label class="btn btn-primary active">
+            <input type="checkbox" checked value="[SECU]" name="log-level"> Secu
+          </label>
+          <label class="btn btn-primary active">
+            <input type="checkbox" checked value="[DEBUG]" name="log-level"> Debug
+          </label>
+          <label class="btn btn-success active">
+            <input type="checkbox" checked value="[SUIVI]" name="log-level"> Suivi
+          </label>
+          <label class="btn btn-warning active">
+            <input type="checkbox" checked value="[WARN]" name="log-level"> Warn
+          </label>
+          <label class="btn btn-danger active">
+            <input type="checkbox" checked value="[ERREUR]" name="log-level"> Erreur
+          </label>
+        </div>
+
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+              <input type="checkbox" onchange="useWrapMode();"> Use Wrap Mode
+            </label>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="clean();">Clean</button>
+        <span id='timer'></span>
+
+        <!-- <div class="input-file-container">
+            <input class="input-file" type="file" accept=".log" name="file">
+            <label class="input-file-trigger btn btn-primary">Import log file</label>
+        </div> -->
+
+        <pre id="editor"></pre>
+
+        <div class="modal fade" id="aboutModal" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">About</h4>
+              </div>
+              <div class="modal-body">
+                  <b>Delete all NUL chars:</b>
+                  <br>With notepad++
+                  <br>Select Replace (Ctrl/H)
+                  <br>Find what: \x00
+                  <br>Replace with:
+                  <br>Click on radio button Regular expression
+                  <br>Click on Replace All
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+    </div>
+
+    <script src="src/core.js"></script>
+
+    <script>
+    </script>
+
+  </body>
+</html>
