@@ -1,3 +1,8 @@
+const regex = /[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}/;
+const regexRessource = /\[Ressource:(\S*)\]/;
+const datePattern = "HH:mm:ss,SSS";
+// var ressource_name = "";
+
 var converted = false;
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
@@ -25,6 +30,7 @@ editor.getSession().on('change', function() {
 
 if (localStorage.getItem("editor_log_content") != null){
     editor.setValue(localStorage.getItem("editor_log_content"));
+    findRessources(editor.getValue());
     editor.setValue(editor.getValue(), -1);
 }
 
@@ -60,13 +66,41 @@ function useWrapMode() {
 
 var input_text;
 
-const regex = /[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}/;
-const datePattern = "HH:mm:ss,SSS";
 
-// On manual edit change : clear this variable
 editor.on("paste", function() {
     input_text = undefined;
 });
+
+
+editor.on("change", function() {
+    if (input_text === undefined){
+        findRessources();
+    }
+});
+
+
+function findRessources(text){
+    if (text === undefined){
+        text = editor.getSession().getValue();
+    }
+    var ressource_names = [];
+    var lines = text.split('\n');
+    for(var i = 0;i < lines.length; i++){
+        ressource_name = lines[i].match(regexRessource);
+        if (ressource_name != null){
+            if (ressource_name.length > 0 & ressource_names.indexOf(ressource_name[1]) == -1){
+                ressource_names.push(ressource_name[1]);
+            }
+        }
+    }
+
+    htmlContent = "";
+    for (let ress of ressource_names) {
+        htmlContent += '<li><a class="dropdown-item" href="#" onclick="filterByRessource(\'' + ress + '\')">' + ress + '</a></li>';
+    }
+    $("#ressource-items").html(htmlContent);
+}
+
 
 editor.getSession().selection.on('changeSelection', function() {
     // Time calculation
@@ -93,7 +127,6 @@ function filterLevel(){
     $.each($("input[name='log-level']:checked"), function(){
         logLevels.push($(this).val());
     });
-    // console.log(logLevels)
 
     if (input_text === undefined){
         input_text = editor.getValue();
@@ -101,7 +134,6 @@ function filterLevel(){
     var lines = input_text.split('\n');
     for(var i = 0;i < lines.length; i++){
         for (let logLevel of logLevels) {
-            // console.log(logLevel)
               if (lines[i].includes(logLevel) ){
                   filtered_text += lines[i] + '\n';
                   break;
@@ -110,6 +142,22 @@ function filterLevel(){
     }
     editor.setValue(filtered_text, -1);
 };
+
+
+function filterByRessource(ressource_name){
+    var filtered_text = "";
+    if (input_text === undefined){
+        input_text = editor.getValue();
+    }
+    var lines = input_text.split('\n');
+    for(var i = 0;i < lines.length; i++){
+          if (lines[i].includes(ressource_name) ){
+              filtered_text += lines[i] + '\n';
+          }
+    }
+    editor.setValue(filtered_text, -1);
+};
+
 
 function clean() {
   var content = editor.getValue();
