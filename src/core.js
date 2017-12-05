@@ -167,6 +167,7 @@ function clean() {
   content = content.replace(/\[distribCanalID:\]\s/g, "");
   content = content.replace(/\[userTypeCASA:\]\s/g, "");
   content = content.replace(/\[consommateur::\]\s/g, "");
+  content = content.replace(/\[versionConsommateur:\S*\]\s/g, "");
   content = content.replace(/\[consommateurOrigine::\]\s/g, "");
   content = content.replace(/\[::\]\s/g, "");
   content = content.replace(/\[idPart:\]\s/g, "");
@@ -180,6 +181,7 @@ function clean() {
   // content = content.replace(/\[Ressource\S*\]\s/g, "");
   content = content.replace(/\[consommateurOrigine\S*\]\s/g, "");
   content = content.replace(/\[consommateur\S*\]\s/g, "");
+  // content = content.replace(/\[MOSTCODE\S*\]\s/g, "");
 
   editor.setValue(content, -1)
   // copyToClipboard(content)

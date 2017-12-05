@@ -29,6 +29,9 @@ var DynHighlightRules = function() {
                 regex: /WARN/,
             }, {
                 token: "variable",
+                regex: /PERF/,
+            }, {
+                token: "variable",
                 regex: /SUIVI/,
             }, {
                 token: "storage.type",
