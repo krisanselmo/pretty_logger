@@ -125,7 +125,7 @@ function filterLevel(){
     var filtered_text = "";
     var logLevels = [];
     $.each($("input[name='log-level']:checked"), function(){
-        logLevels.push($(this).val());
+        logLevels = logLevels.concat($(this).val().split(";"));
     });
 
     if (input_text === undefined){

@@ -22,14 +22,23 @@ var DynHighlightRules = function() {
                 token: "invalid",
                 regex: /ERREUR/,
             }, {
+                token: "invalid",
+                regex: /ERROR/,
+            }, {
                 token: "comment",
                 regex: /SECU/,
+            }, {
+                token: "invalid.deprecated",
+                regex: /WARNING/,
             }, {
                 token: "invalid.deprecated",
                 regex: /WARN/,
             }, {
                 token: "variable",
                 regex: /PERF/,
+            }, {
+                token: "variable",
+                regex: /INFO/,
             }, {
                 token: "variable",
                 regex: /SUIVI/,
