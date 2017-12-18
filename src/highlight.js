@@ -68,7 +68,7 @@ var DynHighlightRules = function() {
                 regex: /[0-9]{4}\/[0-9]{2}\/[0-9]{2}/,
             }, {
                 token: "constant.numeric",
-                regex: /[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}/,
+                regex: /[0-9]{2}:[0-9]{2}:[0-9]{2}[,.][0-9]{3}/,
             }, {
                 token: "string",
                 regex: /\[Ressource:(\S*)\]/,
